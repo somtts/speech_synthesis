@@ -23,7 +23,7 @@ class DiphoneSource:
 diphones= [ ('-a',20,2500),
             ('a-',2500,5000)
           ]
-main_source=DiphoneSource('diphones_ger/ak.wav',diphones)
+main_source=DiphoneSource('spdiphones_ger/ak.wav',diphones)
 
 def main():
     output_folderpath='diphones'
