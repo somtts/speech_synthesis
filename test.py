@@ -1,5 +1,11 @@
+
+#splits diphones, generating the diphone lib,
+# and then synthesizes the strings in the variable input_strings
+
 import os
 import sys
+
+
 
 os.system('python split_diphones.py')
 
@@ -12,4 +18,4 @@ if not os.path.exists(output_folderpath):
 
 for input_string in input_strings:
     output_filepath=os.path.join(output_folderpath,input_string+'.wav')
-    os.system('python pytts.py %s %s' % (input_string,output_filepath))
+    os.system('python tts.py %s %s' % (input_string,output_filepath))
