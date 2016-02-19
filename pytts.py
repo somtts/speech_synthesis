@@ -69,7 +69,7 @@ def main():
     input_string,output_filepath=validate_arguments()
     print "done, syntax ok."
 
-    diphones_path="diphones_ger"
+    diphones_path="diphones"
     print2("2) Loading diphones from folder %s... " % diphones_path)
     diphones_wavs_lib=diphone_lib.read_diphones(diphones_path)
     print "done, %d diphones loaded." % len(diphones_wavs_lib)

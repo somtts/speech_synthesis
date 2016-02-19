@@ -6,23 +6,24 @@ import matplotlib.pyplot as plt
 import ttslib as ttslib
 
 def preprocess_diphone(name,diphone):
-    # remove=1000
-    n=len(diphone)
-
     #TODO REMOVE WHEN USING BETTER DIPHONES
-    if name[0]=='-':
-        diphone=diphone[0:n/2]
-    elif name[-1]=='-':
-        diphone=diphone[n/2:-1]
-    else:
-        diphone=diphone[n/3-100:(n/3)*2+100]
+    # n=len(diphone)
+    # if name[0]=='-':
+    #     diphone=diphone[0:n/2]
+    # elif name[-1]=='-':
+    #     diphone=diphone[n/2:-1]
+    # else:
+    #     diphone=diphone[n/3-100:(n/3)*2+100]
 
-
-    n=len(diphone)
+    #normalize amplitude
     preprocessed_diphone=diphone/max(diphone)
+
+    #TODO remove
+    # n=len(diphone)
     #preprocessed_diphone=ttslib.smooth_wav(preprocessed_diphone,position=31,sigma=2,desired_radius=28)
     #preprocessed_diphone=ttslib.smooth_wav(preprocessed_diphone,position=n-31,sigma=2,desired_radius=28)
 
+    # TODO remove
     # f, axarr = plt.subplots(2, sharex=True)
     # axarr[0].plot(diphone)
     # axarr[0].set_title('%s original' % name )
@@ -30,7 +31,6 @@ def preprocess_diphone(name,diphone):
     # axarr[1].plot(diphone)
     # axarr[1].set_title('%s preprocessed' % name )
     # plt.show()
-
 
     return diphone
 

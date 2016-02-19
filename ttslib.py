@@ -1,6 +1,7 @@
 import soundfile as sf
 import numpy as np
 import utility
+import sys
 from scipy import signal
 import matplotlib.pyplot as plt
 
@@ -8,7 +9,10 @@ import matplotlib.pyplot as plt
 # takes a list of diphones and outputs a wav file with the wavs of each
 # diphone (taken from the diphones_path) concatenated
 def synthesize(diphones_wavs_lib,diphones):
-    diphone_wavs=map(lambda diphone: diphones_wavs_lib[diphone],diphones)
+    try:
+        diphone_wavs=map(lambda diphone: diphones_wavs_lib[diphone],diphones)
+    except KeyError, e:
+        sys.exit("Diphone %s was not found" % str(e))
     return concat_wav(diphone_wavs)
 
 # concatenate multiple wavs into a single one
@@ -69,12 +73,13 @@ def smoothing_radius(desired_radius,position,wav,window_size):
     #possibly make radius smaller based on position and n
     min_length=min(position-1,n-position)
     radius=min(min_length,desired_radius)
-    
+
     #possibly make radius smaller based on window size and n
     #window_half_size=(window_size-1)/2
     #excess_at_beginning= abs( min((position-radius)-window_half_size,0))
     #excess_at_end= abs( min((position-radius)-window_half_size,0))
     #radius=min( max(excess_at_beginning,excess_at_end),radius)
+    return radius
 
 
 # size of window must be odd
