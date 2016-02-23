@@ -24,8 +24,9 @@ def preprocess_diphone(name,diphone):
 # audio signal, float32 encoded, in a numpy array
 def read_diphones(diphones_path):
     diphones_wavs_db={}
-    if filename.endswith(".wav"):
+
     for filename in os.listdir(diphones_path):
+        if filename.endswith(".wav"):
             wav = wavlib.read_wav(os.path.join(diphones_path,filename))
             name=os.path.splitext(filename)[0]
             wav=preprocess_diphone(name,wav)

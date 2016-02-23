@@ -1,6 +1,6 @@
 Developed in python 2.7@lubuntu
 
-Libraries used: 
+Libraries used:
 	pysoundfile
 	numpy
 	scipy
@@ -14,7 +14,7 @@ requires:
 	libsndfile (sudo apt-get install libsndfile1)
 	numpy (sudo apt-get install python-numpy)
 	cffi (sudo apt-get install python-dev && sudo apt-get install python-cffi)
-	
+
 install with:
 	pip install pysoundfile
 

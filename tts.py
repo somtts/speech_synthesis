@@ -1,7 +1,6 @@
 #!/usr/bin/python
 import sys
 import os
-
 import diphone_db
 import ttslib
 import wavlib

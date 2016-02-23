@@ -19,9 +19,12 @@ import os
 # for each subinterval in the output_folderpath
 def split_wav(input_filepath,diphones,output_folderpath):
     wav=wavlib.read_wav(input_filepath)
+    tolerance=0
     for (name,start_ms,end_ms) in diphones:
-        start=start_ms*16 # 16000
-        end=end_ms*16
+        start=start_ms*16 -tolerance # 16000
+        #start=max(start,0)
+        end=end_ms*16 +tolerance
+        #end=min(end,len(diphones))
         diphone=wav[start:end]
         output_filename='%s.wav' % name
         output_filepath=os.path.join(output_folderpath,output_filename)
@@ -37,23 +40,23 @@ def main():
     input_folderpath='diphone_words/'
 
     # helper functions to create DiphoneSources
-    sources={}
+    sources=[]
     make_ds=lambda name,splits: DiphoneSource(os.path.join(input_folderpath,name+'.wav'),splits)
-    make_ds_and_add=lambda name,splits: sources.__setitem__(name,make_ds(name,splits))
+    make_ds_and_add=lambda name,splits: sources.append(make_ds(name,splits))
 
     # Source wav files from which to extract diphones, and intervals for each diphone
     make_ds_and_add('mamA',  [('A-',1202,1704)])
-    make_ds_and_add('kamAla',[('a-',670,774)])
-    make_ds_and_add('kamAla',[('-k',  0,126),('ka',120,258),('am',258,369),('mA',369,461),('Al',461,616)])
-    make_ds_and_add('malApa',[('-m', 30,125),('ma',125,250),('al',250,370),('lA',370,515),('Ap',515,800)])
-    make_ds_and_add('lapAsa',[('-l',122,287),('la',231,334),('ap',343,470),('pA',470,627),('As',627,761)])
-    make_ds_and_add('pasAka',[('-p', 30,110),('pa',110,250),('as',250,392),('sA',392,535),('Ak',535,683)])
-    make_ds_and_add('sakAma',[('-s',177,368),('sa',365,450),('ak',450,580),('kA',580,770),('Am',770,900)])
+    make_ds_and_add('kamAla',[('a-',624,900)])
+    make_ds_and_add('kamAla',[('-k',  0, 20),('ka', 15, 70),('am', 70,225),('mA',225,384),('Al',461,550)])
+    make_ds_and_add('malApa',[('-m',550,700),('ma',700,836),('al',836,951),('lA',951,1100),('Ap',1100,1300)])
+    make_ds_and_add('lapAsa',[('-l', 75,225),('la',225,350),('ap',350,470),('pA',470,625),('As',625,800)])
+    make_ds_and_add('pasAka',[('-p', 77,170),('pa',170,260),('as',260,370),('sA',370,530),('Ak',530,720)])
+    make_ds_and_add('sakAma',[('-s',630,700),('sa',700,820),('ak',820,930),('kA',930,1150),('Am',1150,1300)])
 
 
     output_folderpath='diphones'
     print "Generating diphones in folder \"%s\"..." % output_folderpath
-    for source in sources.values():
+    for source in sources:
         split_wav(source.filepath,source.splits,output_folderpath)
     print "Done"
 

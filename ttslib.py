@@ -2,7 +2,7 @@ import soundfile as sf
 import numpy as np
 import sys
 import smoothing
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 
 # takes a list of diphones and outputs a wav file with the wavs of each
