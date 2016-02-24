@@ -27,8 +27,8 @@ def concat_wav(wavs):
 # and smoothes the interval around the union
 def concat2_wav(wav1,wav2):
     output_wav=np.hstack([wav1,wav2])
-    sigma=2
-    desired_radius=10
+    sigma=10
+    desired_radius=50
     position=len(wav1)
     output_wav_smoothed=smoothing.smooth_wav(output_wav,position,sigma,desired_radius)
 

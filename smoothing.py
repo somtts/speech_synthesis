@@ -13,6 +13,10 @@ def smooth_wav(wav,position,sigma,desired_radius):
 
     smoothed_wav[position]=smooth_position(wav,position,window)
     for i in xrange(radius+1):
+        adjusted_sigma = sigma / (((i+1)/2)+1)
+        if (adjusted_sigma % 2 == 0):
+            adjusted_sigma+=1
+        window=gaussian_window(adjusted_sigma)
         smoothed_wav[position+i]=smooth_position(wav,position+i,window)
         smoothed_wav[position-i]=smooth_position(wav,position-i,window)
     return  smoothed_wav
@@ -30,7 +34,7 @@ def gaussian_window(sigma):
 # and length of the wav
 def smoothing_radius(desired_radius,position,wav,window_size):
     n=len(wav)
-    
+
     #possibly make radius smaller based on position and n
     min_length=min(position-1,n-position)
     radius=min(min_length,desired_radius)
