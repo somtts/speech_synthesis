@@ -1,4 +1,4 @@
-Developed in python 2.7@lubuntu
+Developed in Python 2.7@lubuntu 14.04
 
 Libraries used:
 	pysoundfile
@@ -7,7 +7,7 @@ Libraries used:
 
 Install instructions for debian/ubuntu based distros:
 
-1) pysoundfile
+1) pysoundfile python sound lib
 
 requires:
 	pip (sudo apt-get install python-pip)
@@ -21,3 +21,17 @@ install with:
 2) numpy: should be installed as a requisite for pysoundfile in step 1.
 
 3) scipy: sudo apt-get install python-scipy
+
+Main scripts:
+tts.py                Main file. Can be executed with "python tts.py input_string output_file".
+test.py               Helper script that splits the diphones, and then calls the main file with many test strings, leaving the resulting synthesized wavs in folder 'test_outputs'.
+
+Files with utility functions:
+diphone_db.py         Loads .wav files from a directory to a dictionary (ie, the diphone db)
+smoothing.py          Helper functions to  smooth a signal with a gaussian kernel in a given interval.
+string_processing.py  Helper functions to validate the syntax of the input and tokenize it.
+ttslib.py							Main synthethize function. Concatenates wavs and smoothes the unions.
+wavlib.py							Small wrapper around pysoundfile
+
+Diphone splitting script:
+split_diphones.py     Given a set of wav audio files, and annotations that indicate the intervals for diphones in the file, extracts the diphones to separate wav files.

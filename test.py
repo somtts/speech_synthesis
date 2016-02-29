@@ -12,7 +12,7 @@ os.system('python split_diphones.py')
 output_folderpath='test_outputs/'
 input_strings = ['kamAla','lapAsa','malApa','mamA','pasAka','sakAma']
 input_strings+= ['kala','laka','mama','papa','papA','sAla','kasa','sakA']
-input_strings+= ['mamAsalAlapapa','papAsakAlakama',]
+input_strings+= ['mamAsalAlapApa','papAsakAlakAma',]
 
 if not os.path.exists(output_folderpath):
         os.makedirs(output_folderpath)
